@@ -1,3 +1,4 @@
+# What’s left in your head from C?
 The C programming language began its march to become formally defined by the American National 
 Standard Institute (ANSI) with the formation of the X3J11 committee in 1983. The committee’s work was 
 completed and the standard passed in 1989. Since then, the language is often referred to an “ANSI C”. The 
@@ -12,11 +13,12 @@ around, albeit sometimes in a less elegant manner.
 
 All programming languages, from Ada to ZPL, are built from four basic elements:
 
-- [Expressions](#expressions)
-- [Statements](#statements)
-  - [Operator Precedence in C (Highest to Lowest)](#operator-precedence-in-c-highest-to-lowest)
-- [Statement Blocks](#statement-blocks)
-- [Function Blocks](#function-blocks)
+- [What’s left in your head from C?](#whats-left-in-your-head-from-c)
+  - [Expressions](#expressions)
+  - [Statements](#statements)
+    - [Operator Precedence in C (Highest to Lowest)](#operator-precedence-in-c-highest-to-lowest)
+  - [Statement Blocks](#statement-blocks)
+  - [Function Blocks](#function-blocks)
 
 
 The last element, function blocks, may be called different names in different languages, such as 
