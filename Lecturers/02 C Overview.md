@@ -11,7 +11,7 @@ than able to perform just about any task you can throw at it. The missing featur
 around, albeit sometimes in a less elegant manner.
 
 All programming languages, from Ada to ZPL, are built from four basic elements:
-1. Expressions
+1. Expressions[](#expressions)
 2. Statements
 3. Statement Blocks
 4. Function Blocks
