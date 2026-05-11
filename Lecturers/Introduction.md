@@ -19,3 +19,22 @@ hi and welcome to tihs course.
 | String         | ?           | A reference data type object                                 |
 | array          | ?           | A sequence of a value type that is referenced by a single variable name |
 
+
+
+```cpp
+void setup() {
+  Serial.begin(9600);
+}
+```
+
+
+
+
+همان‌طور که در <a href="#tabla-datos">جدول ۳-۱</a> نشان داده شده است...
+
+<figure id="fig-architecture">
+  <img src="diagram.png" alt="Diagrama">
+  <figcaption><strong>شکل ۱:</strong> نمودار بلوکی سیستم</figcaption>
+</figure>
+
+واقعیت در [شکل ۱](#fig-architecture) قابل مشاهده است.
