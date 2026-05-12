@@ -7,4 +7,4 @@
  
 
  ## Refrences 
- 1. [^1]Beginning C for Arduino Learn C Programming for the Arduino and Compatible Microcontrollers Take complete control of your Arduino  with the power of C, Ph.D. Jack Purdum
+1. Beginning C for Arduino Learn C Programming for the Arduino and Compatible Microcontrollers Take complete control of your Arduino  with the power of C, Ph.D. Jack Purdum
