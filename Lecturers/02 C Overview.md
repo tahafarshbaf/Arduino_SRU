@@ -32,7 +32,7 @@ An expression is created by combining *operands* and *operators*. Simply stated,
 piece of data that is acted on by an operator. An operator is often a mathematical or logical action that is 
 performed on one or more operands.
 
-```
+``` C
 a + b
 m - 300
 a > j
@@ -44,7 +44,7 @@ always use two operands. Another important thing to keep in mind is that any exp
 resolve to a value. (There are also unary operators that have only one operand and ternary operators that 
 require three operands.) However, the binary operators are the most common in C.
 
-```
+``` C
 g < d
 5 < 4
 false
@@ -59,7 +59,7 @@ a value that can be used in a program.
 ## Statements
 A statement is a complete C instruction for the computer. All C statements end with a semicolon (;). The 
 following are examples of C statements:
-```
+``` C
 i = 50;
 a = b + c;
 m = d / 2;
@@ -97,7 +97,7 @@ A *statement block* consists of one or more statements grouped together so they 
 as though they are a single statement. For example, suppose you are an apartment manager, and if there is 
 4 or more inches of snow on the ground, then you need to shovel the sidewalk. You might express this as 
 (the >= operator is read as “greater than or equal to”):
-```
+``` C
 if (snow >= 4) {
     PutOnSnowRemovalStuff();
     GetSnowShovel();
@@ -118,7 +118,7 @@ to bed).
 A function block is a block of code that is designed to accomplish a single task. Although you may not be 
 aware of it, you actually used a function block in the previous section. That is, PutOnSnowRemovalStuff() is 
 a function that is designed to have you put on your coat. The actual code might look like:
-```
+``` C++
 void PutOnSnowRemovalStuff(void) {
     if (NotDressed) {
     PutOnClothes();
@@ -145,4 +145,138 @@ right in the `TurnRight()` black box, you only need to change the program code i
 than in a whole bunch of places where a right turn might be needed. By writing a `TurnRight()`function, 
 you can avoid duplicating all of the statements that are in the `TurnRight()` function each time a right turn 
 is called for in the program.
+
+
+## The Five Program Steps
+Every program you can think of can be reduced to five basic program elements, or steps. When you first
+start to design a program, you should think of that program in terms of the following Five Program Steps.
+
+1. Initialization step
+2. Input step
+3. Process step
+4. Output step
+5. Terminate step
+
+An *algorithm* is nothing more than a formal statement of how a
+given set of inputs are manipulated to produce a desired result. An algorithm is like a recipe or a set of
+blueprints: They describe what you need to do to reach a desired goal or endpoint. And so it is with
+programming: The Five Program Steps can be used to formulate a plan for solving a give programming
+problem. Although algorithms are more closely tied to Steps 2 and 3 (i.e., Input and Processing), the Five
+Program Steps should help you formulate an algorithm to solve whatever task is at hand.[[Beginning C for Arduino](Refrences.md#purdum-beginning-c)].
+
+
+## Comments
+Comments should be used any time you wish to
+document what a program is doing or about to do. Reading code isn’t always easy and it might be hard for
+the reader to figure out what’s going on in a particular section of code. In such cases, a comment may
+make it easier for someone to decipher what the code is supposed to do. For example, if you have a black
+box function that implements some really scary mathematical equation, then you might add a comment
+to explain what is going on. If the function is really complex, then it is not uncommon to put a multiline
+reference comment into the code that has a book and page number (or perhaps an Internet URL address)
+where the reader can go for further information.
+At first blush, it may seem that comments are directed to someone other than the person who actually
+wrote the code. Frequently, that is true, especially if you write code in a commercial environment with
+other programmers who may have to work with your code. However, even if you are the only person who
+will ever see the code, you would be amazed how a piece of code that was so easy to understand this
+morning may as well be written in Sanskrit six months from now. Comments should be used to help the
+person reading the code—whomever that may be.
+So, the question still remains: When do you add comments to a program? Too few comments often
+makes the code difficult to understand. There are simply not enough comments to be helpful to your
+understanding of the code. However, too many comments can have the same effect because they “get in
+the way” of understanding the code. Comments are clutter if they don’t contribute any real benefit to
+understanding the code.
+
+### Single-Line Comments
+Single-line comments begin with a pair of slash `(//)` characters. There can be no spaces between the two
+slashes. (Otherwise the compiler might think it was looking at the division operator.) Upon seeing the two
+slash characters, the compiler knows that what follows from the two slashes to the end of the current line is
+a program comment and does not need to be compiled. As such, comments that begin with `//` must
+appear on the same line as the two slash characters. If you fold a comment to the next line without the
+leading slashes, then it will be seen as a syntax error by the compiler.
+Again, an example of this type of comment is:
+``` C++
+// Pin 13 has an LED connected on most Arduino boards.
+// give it a name:
+```
+
+### Multiline Comments
+Multiline comments begin with a slash-asterisk pair `(/*) and end with an asterisk-slash pair (*/)`. There are
+no spaces between the two characters pairs. Everything in between these two character pairs is treated as a
+comment and is ignored by the compiler. Unlike single line comments, multiline comments can span
+multiple lines. You can see an example of a multiline comment at the top of Listing 2-1.
+Note that you could write the multi-line comment at the top of Listing 2-1 as:
+``` C++
+ /* Blink
+  Turns on an LED on for 1 second, then off for 1 second, repeatedly.
+ /* This example code is in the public domain.
+ ```
+and the program would behave exactly the same. However, multiline comments are useful for long
+comments that span multiple lines because they take fewer keystrokes to implement. The compiler could
+care less which you use. The important thing to remember is that comments invoke no penalty in terms of
+memory space or the performance of the program, so there is no reason not to use them as needed.
+
+There are no hard-and-fast rules for commenting the program source code. My preference is to put a
+multiline comment before most function blocks or any line (or lines) of code that does something unusual
+or “tricky.” For example,
+``` C
+x = y / 2.0;
+x = y * .5; // Divide the number in half
+```
+Either statement produces the same result for floating point numbers. However, the second form is
+slightly faster because division is the slowest math operation you can use. The comment simply jogs the
+reader’s mind as to what is being done. (Normally you would not do this anyway. It would only be
+noticeable if the calculation was being done thousands of times in a big program loop.)
+
+> [!CAUTION]
+> **Performance Optimization for Arduino (Multiplication vs. Division)**
+>
+> **Method 1: Shift Bits for Powers of 2**
+> - **Slow:** `int y = x / 4;`
+> - **Fast:** `int y = x / 4;`
+> - **Fast Pro Max:** `int y = x >> 2;`  (3-4x faster)
+> - **Note:** Only use for division/multiplication by 2, 4, 8, 16, 32... (powers of 2)
+> - **Warning:** Be careful with negative numbers!
+>
+> **Method 2: Use Constants at Compile Time**
+> - **Slow:** `float y = x / 3.0;`
+> - **Fast:** `const float factor = 1.0 / 3.0;` then `float y = x * factor;`
+> - **Why:** The division happens once at compile time, not repeatedly at runtime
+>
+> **Method 3: Avoid Floating Point Operations**
+> - **Slow:** `float result = (sensorValue * 3.14) / 2.73;`
+> - **Fast:** `int result = (sensorValue * 314) / 273;` (no decimals!)
+> - **Why** Integer math is 5-10x faster than floating point on Arduino
+> - **Remember:** Multiplication (*) is always faster than division (/) - replace `/` with `*` whenever possible
+
+## Variable Names in C
+There are three general
+rules for naming variables or functions in C: Valid variable names may contain:
+1. Characters a through z and A through Z
+2. The underscore character (_)
+3. Digit characters 0 through 9, provided they are not used as the first character in
+the name.
+Just about everything else is not acceptable, including C keywords. That also means that punctuation,
+and other special non-printing characters are not allowed either. Valid variable names might include:
+```
+jane Jane ohm ampere volt
+money day1 Week50 _system XfXf
+```
+Using the same rules, the following would not be valid names:
+```
+^carat 4July -negative @URL
+%percent not-Good This&That what?
+```
+
+Given these limits, how does one create a “good” variable name? As a general rule, I like variable
+names that are long enough to give me a clue as to what they do in a program but short enough that I don’t
+get tired of typing their name. Another convention a lot of programmers used is a variant of what’s called
+camel notation. Using this notation, variable names begin with a lowercase letter with each subword
+capitalized. Examples using this style might be:
+```
+myFriend togglePrinter reloadEmptyPaperTray closeDriveDoor
+```
+
+> [!warning]
+> Keep in mind that C is case sensitive, which means that `myData` and `MyData` are two different
+variables.
 
