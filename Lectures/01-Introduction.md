@@ -23,4 +23,4 @@ The heart of the Arduino Uno R3 DIP is the **ATmega328P** microcontroller. This 
 
 
 
-[^1]: Interaction Design Institute Ivrea.
+
