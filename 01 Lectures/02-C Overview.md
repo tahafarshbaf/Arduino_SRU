@@ -11,14 +11,130 @@ means. You will soon discover that the subset version of standard C, which we wi
 than able to perform just about any task you can throw at it. The missing features can easily be worked 
 around, albeit sometimes in a less elegant manner.
 
+
+## Variable Names in C
+There are three general
+rules for naming variables or functions in C: Valid variable names may contain:
+1. Characters a through z and A through Z
+2. The underscore character (_)
+3. Digit characters 0 through 9, provided they are not used as the first character in
+the name.
+Just about everything else is not acceptable, including C keywords. That also means that punctuation,
+and other special non-printing characters are not allowed either. Valid variable names might include:
+```
+jane Jane ohm ampere volt
+money day1 Week50 _system XfXf
+```
+Using the same rules, the following would not be valid names:
+```
+^carat 4July -negative @URL
+%percent not-Good This&That what?
+```
+
+Given these limits, how does one create a “good” variable name? As a general rule, I like variable
+names that are long enough to give me a clue as to what they do in a program but short enough that I don’t
+get tired of typing their name. Another convention a lot of programmers used is a variant of what’s called
+camel notation. Using this notation, variable names begin with a lowercase letter with each subword
+capitalized. Examples using this style might be:
+```
+myFriend togglePrinter reloadEmptyPaperTray closeDriveDoor
+```
+
+> [!warning]
+> Keep in mind that C is case sensitive, which means that `myData` and `MyData` are two different
+variables.
+
+
+
+
+
+## Decision Making 
+As you might guess, a decision is often based on comparing the state of two or more pieces of data. You 
+make such decisions all the time, probably without thinking much about the process that is involved in 
+making the decision. The phone rings and you get up to answer it. Implicitly, you make a decision whether 
+to answer the call or not. Further, that decision involved comparing the expected benefits from answering 
+the call (e.g., it might be someone you want to talk with) versus the expected costs of not answering the 
+call (i.e., I may miss out on talking to someone important). Some decisions are better than others. Indeed, 
+the definition of a dilemma is when you have two or more choices and they are all bad.
+
+All of the operators in the 
+table are binary operators and require two operands. 
+
+
+| Operator | Interpretation                 |
+|----------|--------------------------------|
+| >        | Greater than                   |
+| >=       | Greater than or equal to       |
+| <        | Less than                      |
+| <=       | Less than or equal to          |
+| ==       | Equal to                       |
+| !=       | Not equal to                   |
+
+
+>[!NOTE]
+> The result of all relational operations is either logic true (non-zero) or logic false (zero).
+> ```
+>5 > 4 // Logic true
+>5 < 4 // logic false
+>5 == 4 // logic false
+>5 != 4 // logic true
+>```
+
+### The if Statement
+In a computer program, unless the central processing unit (CPU) is told to do otherwise, the CPU 
+processes the source code program instructions in a linear, top-to-bottom manner. That is, program 
+execution starts at whatever is designated as the starting point for the program and plows through the 
+source code from that point to the next statement until all of the statements have been processed.
+
+
+> [!IMPORTANT]
+> In an Arduino C program, the starting point for the program is the function named `setup()`. The program processes all of the statements in the `setup()` function block starting with the first statement and marches through the statements from statement 1 to statement 2 to statement 3... until it reaches the closing parentheses of the `setup()` function block.
+> 
+The syntax for an if statement is:
+``` C
+if (expression1 is logic true) {
+  // execute this if statement block if true
+}
+// statements following the if statement block
+```
+Example:
+```C
+int b = 10;
+// some more program statement...
+if (b < 20) {
+  b = doSomethingNeat();
+}
+doSomethingElse(b);
+```
+
+![if Statement](<Images/if-statement.jpg>)
+
+If the if statement block consists of a single program statement, then the braces defining the 
+statement block may be omitted.
+
+> [!CAUTION]
+> We used a single equal sign for the relational expression rather than the proper "is equal to" operator (`==`). This means the code performs an assignment statement, not a relational test.
+
+
+
+
+
+
+
+
+
+
+
 All programming languages, from Ada to ZPL, are built from four basic elements:
 
-- [What’s left in your head from C?](#whats-left-in-your-head-from-c)
-  - [Expressions](#expressions)
-  - [Statements](#statements)
-    - [Operator Precedence in C (Highest to Lowest)](#operator-precedence-in-c-highest-to-lowest)
-  - [Statement Blocks](#statement-blocks)
-  - [Function Blocks](#function-blocks)
+
+
+
+
+
+
+
+
 
 
 The last element, function blocks, may be called different names in different languages, such as 
@@ -248,35 +364,5 @@ noticeable if the calculation was being done thousands of times in a big program
 > - **Why** Integer math is 5-10x faster than floating point on Arduino
 > - **Remember:** Multiplication (*) is always faster than division (/) - replace `/` with `*` whenever possible
 
-## Variable Names in C
-There are three general
-rules for naming variables or functions in C: Valid variable names may contain:
-1. Characters a through z and A through Z
-2. The underscore character (_)
-3. Digit characters 0 through 9, provided they are not used as the first character in
-the name.
-Just about everything else is not acceptable, including C keywords. That also means that punctuation,
-and other special non-printing characters are not allowed either. Valid variable names might include:
-```
-jane Jane ohm ampere volt
-money day1 Week50 _system XfXf
-```
-Using the same rules, the following would not be valid names:
-```
-^carat 4July -negative @URL
-%percent not-Good This&That what?
-```
 
-Given these limits, how does one create a “good” variable name? As a general rule, I like variable
-names that are long enough to give me a clue as to what they do in a program but short enough that I don’t
-get tired of typing their name. Another convention a lot of programmers used is a variant of what’s called
-camel notation. Using this notation, variable names begin with a lowercase letter with each subword
-capitalized. Examples using this style might be:
-```
-myFriend togglePrinter reloadEmptyPaperTray closeDriveDoor
-```
-
-> [!warning]
-> Keep in mind that C is case sensitive, which means that `myData` and `MyData` are two different
-variables.
 
