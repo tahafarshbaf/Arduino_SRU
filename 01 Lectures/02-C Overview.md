@@ -12,6 +12,9 @@ than able to perform just about any task you can throw at it. The missing featur
 around, albeit sometimes in a less elegant manner.
 
 
+
+
+
 ## Variable Names in C
 There are three general
 rules for naming variables or functions in C: Valid variable names may contain:
@@ -61,14 +64,14 @@ All of the operators in the
 table are binary operators and require two operands. 
 
 
-| Operator | Interpretation                 |
-|----------|--------------------------------|
-| >        | Greater than                   |
-| >=       | Greater than or equal to       |
-| <        | Less than                      |
-| <=       | Less than or equal to          |
-| ==       | Equal to                       |
-| !=       | Not equal to                   |
+| Operator | Interpretation           |
+| -------- | ------------------------ |
+| >        | Greater than             |
+| >=       | Greater than or equal to |
+| <        | Less than                |
+| <=       | Less than or equal to    |
+| ==       | Equal to                 |
+| !=       | Not equal to             |
 
 
 >[!NOTE]
@@ -115,6 +118,30 @@ statement block may be omitted.
 > [!CAUTION]
 > We used a single equal sign for the relational expression rather than the proper "is equal to" operator (`==`). This means the code performs an assignment statement, not a relational test.
 
+### The if-else Statement
+ provides another form of the simple if statement called the if-else statement. The syntax for the if-else statement is:
+```C
+if (expression evaluates to logic true) {
+  // perform this statement block if logic true
+} else {
+  // perform this statement block otherwise
+}
+```
+
+> Just because you have a program working doesn’t mean it is the most efficient way to 
+write the code.
+
+
+> [!TIP]
+> There are two flavors for the increment/decrement operator:
+> - **Pre-increment** (`++counter`): The value of the variable is fetched, incremented, and then used in the expression.
+> - **Post-increment** (`counter++`): The value of the variable is fetched and used in the expression, and then incremented afterward.
+>
+> Notice that `++` appears **before** the variable name for pre-increment, and **after** the variable name for post-increment.
+
+
+
+### The switch Statement
 
 
 
@@ -188,23 +215,23 @@ value on the right side of the equal sign to the operand on the left side of the
 
 ### Operator Precedence in C (Highest to Lowest)
 
-| Precedence | Operators                               | Description                                                                   | Associativity |
-|------------|-----------------------------------------|-------------------------------------------------------------------------------|---------------|
-| 1          | `()` `[]` `.` `->` `++` `--` (postfix) | Function call, array subscript, member access, post-increment/decrement       | Left to right |
+| Precedence | Operators                                                    | Description                                                                                            | Associativity |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------- |
+| 1          | `()` `[]` `.` `->` `++` `--` (postfix)                       | Function call, array subscript, member access, post-increment/decrement                                | Left to right |
 | 2          | `++` `--` (prefix) `+` `-` `!` `~` `*` `&` `sizeof` `(type)` | Prefix inc/dec, unary plus/minus, logical NOT, bitwise NOT, dereference, address-of, sizeof, type cast | Right to left |
-| 3          | `*` `/` `%`                             | Multiplication, division, modulo (remainder)                                  | Left to right |
-| 4          | `+` `-`                                 | Addition, subtraction                                                         | Left to right |
-| 5          | `<<` `>>`                               | Bitwise left shift, bitwise right shift                                       | Left to right |
-| 6          | `<` `<=` `>` `>=`                       | Relational operators (less than, less than or equal, greater than, greater than or equal) | Left to right |
-| 7          | `==` `!=`                               | Equality (equal to, not equal to)                                             | Left to right |
-| 8          | `&`                                     | Bitwise AND                                                                   | Left to right |
-| 9          | `^`                                     | Bitwise XOR (exclusive OR)                                                    | Left to right |
-| 10         | `\|`                                    | Bitwise OR (inclusive OR)                                                     | Left to right |
-| 11         | `&&`                                    | Logical AND                                                                   | Left to right |
-| 12         | `\|\|`                                  | Logical OR                                                                    | Left to right |
-| 13         | `?:`                                    | Ternary conditional operator                                                  | Right to left |
-| 14         | `=` `+=` `-=` `*=` `/=` `%=` `&=` `^=` `\|=` `<<=` `>>=` | Assignment and compound assignment operators                                   | Right to left |
-| 15         | `,`                                     | Comma operator                                                                | Left to right |
+| 3          | `*` `/` `%`                                                  | Multiplication, division, modulo (remainder)                                                           | Left to right |
+| 4          | `+` `-`                                                      | Addition, subtraction                                                                                  | Left to right |
+| 5          | `<<` `>>`                                                    | Bitwise left shift, bitwise right shift                                                                | Left to right |
+| 6          | `<` `<=` `>` `>=`                                            | Relational operators (less than, less than or equal, greater than, greater than or equal)              | Left to right |
+| 7          | `==` `!=`                                                    | Equality (equal to, not equal to)                                                                      | Left to right |
+| 8          | `&`                                                          | Bitwise AND                                                                                            | Left to right |
+| 9          | `^`                                                          | Bitwise XOR (exclusive OR)                                                                             | Left to right |
+| 10         | `\|`                                                         | Bitwise OR (inclusive OR)                                                                              | Left to right |
+| 11         | `&&`                                                         | Logical AND                                                                                            | Left to right |
+| 12         | `\|\|`                                                       | Logical OR                                                                                             | Left to right |
+| 13         | `?:`                                                         | Ternary conditional operator                                                                           | Right to left |
+| 14         | `=` `+=` `-=` `*=` `/=` `%=` `&=` `^=` `\|=` `<<=` `>>=`     | Assignment and compound assignment operators                                                           | Right to left |
+| 15         | `,`                                                          | Comma operator                                                                                         | Left to right |
 
 
 
