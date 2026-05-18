@@ -1,3 +1,6 @@
+
+
+
 # What’s left in your head from C?
 The C programming language began its march to become formally defined by the American National 
 Standard Institute (ANSI) with the formation of the X3J11 committee in 1983. The committee’s work was 
@@ -49,8 +52,6 @@ variables.
 
 
 
-
-
 ## Decision Making 
 As you might guess, a decision is often based on comparing the state of two or more pieces of data. You 
 make such decisions all the time, probably without thinking much about the process that is involved in 
@@ -89,11 +90,7 @@ processes the source code program instructions in a linear, top-to-bottom manner
 execution starts at whatever is designated as the starting point for the program and plows through the 
 source code from that point to the next statement until all of the statements have been processed.
 
-
-> [!IMPORTANT]
-> In an Arduino C program, the starting point for the program is the function named `setup()`. The program processes all of the statements in the `setup()` function block starting with the first statement and marches through the statements from statement 1 to statement 2 to statement 3... until it reaches the closing parentheses of the `setup()` function block.
-> 
-The syntax for an if statement is:
+he syntax for an if statement is:
 ``` C
 if (expression1 is logic true) {
   // execute this if statement block if true
@@ -140,13 +137,32 @@ write the code.
 > Notice that `++` appears **before** the variable name for pre-increment, and **after** the variable name for post-increment.
 
 
-
 ### The switch Statement
 
+```C
+switch (expression1) { // opening brace for switch statement block
+	case 1:
+		 // statements to execute when expression1 is 1
+		break;
+	case 2:
+		 // statements to execute when expression1 is 2
+		break;
+	case 3:
+		 // statements to execute when expression1 is 3
+		break;
+	// more case statements as needed
+	default:
+		// statements to execute if expression1 doesn't have a "case value"
+	break;
+} // close brace for switch statement block
+// This is the next statement after the switch
+```
+
+The expression1 must evaluate to an integral data type. That is, expression1 could be a byte, char, int, or long (including their unsigned counterparts)—it cannot be a floating point type (float or double) nor can it be a reference data type (e.g., string or String). Although Arduino C also accepts a Boolean data type for expression1, that seems suspect to me, and I wouldn’t suggest using it. After all, a Boolean is either true or false, so an if-else statement block would work.
 
 
-
-
+> [!NOTE]
+> If you forget the break statement for a given case, then program execution falls through to the next case statement. This can be a potential source of errors in your programs. However, there are also times when two case values may need to execute the same program statements.
 
 
 
