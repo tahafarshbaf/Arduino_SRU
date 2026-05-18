@@ -1,6 +1,8 @@
 
-
-
+**Table of Content**
+1. [[#Variable Names in C]]
+2. [[#Decision Making]]
+3. 
 # What’s left in your head from C?
 The C programming language began its march to become formally defined by the American National 
 Standard Institute (ANSI) with the formation of the X3J11 committee in 1983. The committee’s work was 
