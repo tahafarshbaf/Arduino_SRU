@@ -28,11 +28,9 @@ For both beginners and experienced developers, using a simulator offers several 
 1. [Wokwi](https://wokwi.com/): wokwi
    is a free online simulator for electronic circuits and embedded systems. It allows you to design, code, and debug projects for microcontrollers like Arduino, ESP32, and Raspberry Pi Pico entirely within your web browser, without needing any physical hardware.
 
-![wokwi](<01 Lectures/Images/wokwi.jpg>)
+
+
 2. [Tinkercad](https://www.tinkercad.com/): While Tinkercad is famous for 3D design, the "Circuits" feature lets you build and simulate electronic circuits, program virtual microcontrollers, and even design printed circuit boards (PCBs).
-
-![tinkercad](<01 Lectures/Images/tinkercad.png>)
-
 
 
 ### Offline Simulators
