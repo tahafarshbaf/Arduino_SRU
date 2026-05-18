@@ -13,13 +13,29 @@
 
 
 ## Simulators
+Why Use a Simulator?
+For both beginners and experienced developers, using a simulator offers several advantages:
 
-### Online
-1. [Wokwi](https://wokwi.com/)
-2. [Tinkercad](https://www.tinkercad.com/)
+1. Zero Risk, Zero Cost: You can't damage any components by making a wrong connection, and you can start learning for free.
+
+2. Convenience and Speed: There's no need to wait for parts to ship or spend time troubleshooting physical wiring. You can start coding and testing a new idea instantly.
+
+3. Accessibility: It's an excellent tool for education, allowing anyone with a web browser to learn about embedded systems without a significant upfront investment in hardware.
 
 
-### offline
+
+### Online Simulators
+1. [Wokwi](https://wokwi.com/): wokwi
+   is a free online simulator for electronic circuits and embedded systems. It allows you to design, code, and debug projects for microcontrollers like Arduino, ESP32, and Raspberry Pi Pico entirely within your web browser, without needing any physical hardware.
+
+![wokwi](<01 Lectures/Images/wokwi.jpg>)
+2. [Tinkercad](https://www.tinkercad.com/): While Tinkercad is famous for 3D design, the "Circuits" feature lets you build and simulate electronic circuits, program virtual microcontrollers, and even design printed circuit boards (PCBs).
+
+![tinkercad](<01 Lectures/Images/tinkercad.png>)
+
+
+
+### Offline Simulators
 1. [Fritzing](https://soft98.ir/software/engineering/199-fritzing.html)
 2. [Proteus](https://soft98.ir/software/engineering/3535-%D8%AF%D8%A7%D9%86%D9%84%D9%88%D8%AF-proteus.html)
 

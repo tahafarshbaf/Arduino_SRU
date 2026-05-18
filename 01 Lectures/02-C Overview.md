@@ -1,8 +1,7 @@
 
 **Table of Content**
-1. [[#Variable Names in C]]
-2. [[#Decision Making]]
-3. 
+1. [Variable Names in C](#variable-names-in-c)
+
 # What’s left in your head from C?
 The C programming language began its march to become formally defined by the American National 
 Standard Institute (ANSI) with the formation of the X3J11 committee in 1983. The committee’s work was 
@@ -52,7 +51,46 @@ myFriend togglePrinter reloadEmptyPaperTray closeDriveDoor
 > Keep in mind that C is case sensitive, which means that `myData` and `MyData` are two different
 variables.
 
+## Expressions
+An expression is created by combining *operands* and *operators*. Simply stated, an operand is typically a 
+piece of data that is acted on by an operator. An operator is often a mathematical or logical action that is 
+performed on one or more operands.
 
+``` C
+a + b
+m - 300
+a > j
+```
+
+In each of these expressions, there are two operands and one operator. That’s why you will often hear 
+such expressions referred to as expressions that use a *binary operator*. Binary operators (e.g., +, –, and <) 
+always use two operands. Another important thing to keep in mind is that any expression will ultimately 
+resolve to a value. (There are also unary operators that have only one operand and ternary operators that 
+require three operands.) However, the binary operators are the most common in C.
+
+``` C
+g < d
+5 < 4
+false
+```
+
+> [!NOTE]
+> In programming languages, logic true and logic false expressions do resolve 
+to a value. In most languages, logic true resolves to a non-zero value (e.g., –1), and logic false is zero. 
+Relational expressions are designed to resolve to a logic true or false state, so they ultimately do resolve to 
+a value that can be used in a program.
+
+## Statements
+A statement is a complete C instruction for the computer. All C statements end with a semicolon (;). The 
+following are examples of C statements:
+``` C
+i = 50;
+a = b + c;
+m = d / 2;
+```
+
+In the first example, the equal sign `(=)` *is called the assignment operator* and is used to “assign” the 
+value on the right side of the equal sign to the operand on the left side of the assignment operator.
 
 ## Decision Making 
 As you might guess, a decision is often based on comparing the state of two or more pieces of data. You 
@@ -84,7 +122,10 @@ table are binary operators and require two operands.
 >5 < 4 // logic false
 >5 == 4 // logic false
 >5 != 4 // logic true
->```
+>``` 
+
+
+
 
 ### The if Statement
 In a computer program, unless the central processing unit (CPU) is told to do otherwise, the CPU 
@@ -188,46 +229,7 @@ some more exotic name in lesser-known languages. Regardless of their name, funct
 blocks of code designed to address some narrowly-defined task. Programs are little more than 
 arrangements of these elements in a way that solves a problem.
 
-## Expressions
-An expression is created by combining *operands* and *operators*. Simply stated, an operand is typically a 
-piece of data that is acted on by an operator. An operator is often a mathematical or logical action that is 
-performed on one or more operands.
 
-``` C
-a + b
-m - 300
-a > j
-```
-
-In each of these expressions, there are two operands and one operator. That’s why you will often hear 
-such expressions referred to as expressions that use a *binary operator*. Binary operators (e.g., +, –, and <) 
-always use two operands. Another important thing to keep in mind is that any expression will ultimately 
-resolve to a value. (There are also unary operators that have only one operand and ternary operators that 
-require three operands.) However, the binary operators are the most common in C.
-
-``` C
-g < d
-5 < 4
-false
-```
-
-> [!NOTE]
-> In programming languages, logic true and logic false expressions do resolve 
-to a value. In most languages, logic true resolves to a non-zero value (e.g., –1), and logic false is zero. 
-Relational expressions are designed to resolve to a logic true or false state, so they ultimately do resolve to 
-a value that can be used in a program.
-
-## Statements
-A statement is a complete C instruction for the computer. All C statements end with a semicolon (;). The 
-following are examples of C statements:
-``` C
-i = 50;
-a = b + c;
-m = d / 2;
-```
-
-In the first example, the equal sign `(=)` *is called the assignment operator* and is used to “assign” the 
-value on the right side of the equal sign to the operand on the left side of the assignment operator.
 
 > Whats is a variable?
 
