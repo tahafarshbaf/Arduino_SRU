@@ -1,7 +1,4 @@
 
-**Table of Content**
-1. [Variable Names in C](#variable-names-in-c)
-
 # What’s left in your head from C?
 The C programming language began its march to become formally defined by the American National 
 Standard Institute (ANSI) with the formation of the X3J11 committee in 1983. The committee’s work was 
@@ -231,8 +228,6 @@ arrangements of these elements in a way that solves a problem.
 
 
 
-> Whats is a variable?
-
 ### Operator Precedence in C (Highest to Lowest)
 
 | Precedence | Operators                                                    | Description                                                                                            | Associativity |
@@ -253,6 +248,7 @@ arrangements of these elements in a way that solves a problem.
 | 14         | `=` `+=` `-=` `*=` `/=` `%=` `&=` `^=` `\|=` `<<=` `>>=`     | Assignment and compound assignment operators                                                           | Right to left |
 | 15         | `,`                                                          | Comma operator                                                                                         | Left to right |
 
+> What is the difference between `&` and `&&`?
 
 ## Program Loops
 One of the things computers can do more efficiently than humans is repetitive tasks.Computers never get 
@@ -337,56 +333,91 @@ do {
  with a `do-while` loop, you are guaranteed 
 that the loop body statements are executed at least one time.
 
-## Function Blocks
+### The break and continue Keywords
 
-A function block is a block of code that is designed to accomplish a single task. Although you may not be 
-aware of it, you actually used a function block in the previous section. That is, PutOnSnowRemovalStuff() is 
-a function that is designed to have you put on your coat. The actual code might look like:
-``` C++
-void PutOnSnowRemovalStuff(void) {
-    if (NotDressed) {
-    PutOnClothes();
-    PutOnShoes();
-    }
-    GoToCloset();
-    PutOnBoots();
-    PutOnCoat();
-    PutOnGloves();
-    PutOnHat();
-}
+The `break` and `continue` statements are often used within loops structures. Simply stated, a `break` 
+statement sends program control to the statement that immediately follows the closing brace of the loop 
+body. (In a do-while, control is sent to the first statement following the while statement.) The `continue` 
+statement immediately sends program control to the test conditions of the loop (i.e., expression2) for this 
+pass through the loop.  That is, any statements contained in the loop following the `continue` statement are 
+ignored when the `continue` statement executes.
+
+## Functions
+A *function* is a body of code 
+designed to solve a particular task. You should think of a function as a black box, the contents of which are 
+unknown to you. All you care about is that it addresses some task to be accomplished in your program. 
+Hundreds of functions are available for you to use in various function libraries. A *function library* is simply 
+a collection of functions that share a common area of interest
+
+Let’s take a look at the general structure of a C function:
+![function](Images/function.jpg)
+
+1. the purpose of a *function type* specifier is to define the type of data that is 
+returned when the function is called. The type of data returned from the function can be whatever data 
+type you wish (e.g., double, long, char, byte, etc.). If no value is returned from the function, then the type 
+specifier must use the void keyword.
+
+2. Function names follow the same naming rules 
+you use for variable names. Most library functions start with a lowercase letter, although that is not a 
+requirement of the language.
+
+
+3. After the function name comes an opening parenthesis followed by zero or more function arguments. 
+Function arguments are used to pass data to the function that it may need to perform its task. Multiple 
+function arguments are delineated with commas between arguments. 
+
+
+> [!TIP]
+> The choice of a function name does matter. Good function names tell you what the function does but 
+not necessarily how it does it. A function should be a black box in that it tells you what it 
+does but provides no details on its implementation. **specific task, specific tool**
+
+### Function Signature 
+ A function signature is 
+comprised of everything following the type specifier through the closing parenthesis of the argument list. 
+For example, for the VolumeOfCube() function, the function signature is: 
+```C
+VolumeOfCube(int width, int length, int height)
 ```
 
 
-In this example, the function block also starts with an opening brace { and ends with a closing braces 
-}. However, function blocks are usually written to create “**black boxes**” in which the details of how we are 
-doing something are buried in the function. You might be thinking of writing the code to control a robot 
-that will require sensors to sense whatever lies ahead. You might write a `TurnRight()` function that turns 
-your robot 90 degrees to the right. This probably involves turning one of the wheels, perhaps applying a 
-greater voltage to a stepper motor to cause the front two wheels to turn to the right. However, perhaps at a 
-later time you decide to change your robot from four wheels to three wheels. Now you don’t need to turn 
-two wheels; only one needs to turn. By hiding the details of what has to be done to turn your robot to the 
-right in the `TurnRight()` black box, you only need to change the program code in that one place, rather 
-than in a whole bunch of places where a right turn might be needed. By writing a `TurnRight()`function, 
-you can avoid duplicating all of the statements that are in the `TurnRight()` function each time a right turn 
-is called for in the program.
+### overloaded functions
+Anytime a function has two or more different signatures, it is called an overloaded function. (Technically, 
+the C programming language does not allow overloaded functions, whereas C++ does. Because the 
+Arduino C compiler is built on the Gnu C++ compiler, Arduino C does permit overloaded functions. This is 
+a good thing!) Often, two signatures are used when a default value doesn’t solve the task at hand.
+
+> What problem arises if we define a function with the same signature as one of the existing functions in C?
 
 
-## The Five Program Steps
-Every program you can think of can be reduced to five basic program elements, or steps. When you first
-start to design a program, you should think of that program in terms of the following Five Program Steps.
+### Documentation
+```C
+/*****
+Purpose: 
+Parameters:
+Return value:  
+*****/
+```
+```C
+/**
+  Program: 
+  Author: 
+**/
+```
 
-1. Initialization step
-2. Input step
-3. Process step
-4. Output step
-5. Terminate step
+### What Makes a “Good” Function
+1. Functions Use Task-Oriented Names
+2. The Function Should Be Cohesive
+3. Functions Should Avoid Coupling
 
-An *algorithm* is nothing more than a formal statement of how a
-given set of inputs are manipulated to produce a desired result. An algorithm is like a recipe or a set of
-blueprints: They describe what you need to do to reach a desired goal or endpoint. And so it is with
-programming: The Five Program Steps can be used to formulate a plan for solving a give programming
-problem. Although algorithms are more closely tied to Steps 2 and 3 (i.e., Input and Processing), the Five
-Program Steps should help you formulate an algorithm to solve whatever task is at hand.[[Beginning C for Arduino](Refrences.md#purdum-beginning-c)].
+After you write this function, handing the function to another programmer 
+for use of your function should prompt only three questions from them: 
+- What task does this function perform?
+-	What data do I need to send to the function?
+-	What data do I get back from it? 
+
+If you have done your design work well, the function name answers the first question, the argument 
+list answers the second question, and the function type specifier answers the third question.
 
 
 ## Comments
@@ -474,3 +505,20 @@ noticeable if the calculation was being done thousands of times in a big program
 
 
 
+
+## The Five Program Steps
+Every program you can think of can be reduced to five basic program elements, or steps. When you first
+start to design a program, you should think of that program in terms of the following Five Program Steps.
+
+1. Initialization step
+2. Input step
+3. Process step
+4. Output step
+5. Terminate step
+
+An *algorithm* is nothing more than a formal statement of how a
+given set of inputs are manipulated to produce a desired result. An algorithm is like a recipe or a set of
+blueprints: They describe what you need to do to reach a desired goal or endpoint. And so it is with
+programming: The Five Program Steps can be used to formulate a plan for solving a give programming
+problem. Although algorithms are more closely tied to Steps 2 and 3 (i.e., Input and Processing), the Five
+Program Steps should help you formulate an algorithm to solve whatever task is at hand.[[Beginning C for Arduino](Refrences.md#purdum-beginning-c)].
