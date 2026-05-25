@@ -30,7 +30,7 @@ capacitors in backwards, they can explode.
 
 ## Code
 ```C++
-include <Servo.h>
+#include <Servo.h>
 
 Servo myServo;
 

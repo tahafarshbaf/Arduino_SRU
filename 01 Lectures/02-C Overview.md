@@ -254,27 +254,88 @@ arrangements of these elements in a way that solves a problem.
 | 15         | `,`                                                          | Comma operator                                                                                         | Left to right |
 
 
+## Program Loops
+One of the things computers can do more efficiently than humans is repetitive tasks.Computers never get 
+bored, so they are great at performing repetitive tasks. Unless a mc loses power or a component fails, they 
+will loop forever, unless instructed to do otherwise. 
 
-## Statement Blocks
-A *statement block* consists of one or more statements grouped together so they are viewed by the compiler 
-as though they are a single statement. For example, suppose you are an apartment manager, and if there is 
-4 or more inches of snow on the ground, then you need to shovel the sidewalk. You might express this as 
-(the >= operator is read as “greater than or equal to”):
-``` C
-if (snow >= 4) {
-    PutOnSnowRemovalStuff();
-    GetSnowShovel();
-    ShovelSidewalk();
+### For Loops
+The general syntax structure of a for loop is as follows:
+```C++
+for (expression1; expression2; expression3) {
+  // for loop statement body
 }
-else {
-    GoBackToBed();
-}
+// the first statement following the for loop structure
 ```
-Statement blocks start with an opening brace character { and end with a closing brace character }. All 
-statements between the opening and closing braces form the *statement block body*. In our example, it 
-appears that when 4 or more inches of snow exist, we will put on our coat, grab a snow shovel, and shovel 
-the sidewalks. If there is less than 4 inches of snow, a different statement block is executed (i.e., we go back 
-to bed).
+
+In the loop structure, `expression1` usually initializes the variable that controls the loop. However, 
+because `expression1` can have a comma-separated list of subexpressions, we can’t say `expression1` always 
+initializes a loop control variable. (You will see an example of this in the next paragraph.) `expression2` 
+performs some form of logical test to determine if another pass through the loop body is warranted. 
+`expression3` is usually responsible for changing the state of the loop control variable but is not required to 
+do so. (In fact, you could move expression3 into the loop body if you wanted to, but that’s not the 
+conventional style.)
+
+![foor-loop](Images/forloop.jpg)
+
+
+Note that `expression1` can 
+have a comma-delimited list of subexpressions. For example, you may see something like:
+```C
+for (k = 0, j = 1; k < 1000; k++) 
+```
+where j is initialized to 1 as part of expression1. You can also move the definition and initialization into 
+expression1, as in:
+```C
+for (int k = 0; k < 1000; k++) {
+```
+
+Usually, `expression3` is used to change the state of the variable that controls the loop iterations, 
+variable k in our example. You can have a comma-delimited list of subexpressions, as in:
+```C
+for (k = 0; k < 1000; k++, j--) {
+```
+
+### While Loop
+
+The syntax of the while loop is:
+```C
+while (expression2) {
+  // Statements in the loop body
+}   
+// End of while statement block
+```
+
+Notice that only `expression2`, the expression that tests whether another pass through the loop 
+statement body is needed, appears as an integral part of the loop structure’s syntax.
+
+Example:
+```C
+int k;
+// some additional statements
+k = 0;   
+// This is expression1
+while (k < 1000) {  
+  // This is expression3
+}    
+// This is expression2DoSomethingCool();k++;   
+// End of the while loop
+```
+
+> [!CAUTION]
+> After each pass through the loop, the expression controlling the loop must change state. If the control 
+variable did not change state during the processing of the loop statements, the loop will execute forever.
+
+### do-while Loop
+
+The syntax is:
+```C
+do {
+   // Loop body statements
+} while (expression2);
+```
+ with a `do-while` loop, you are guaranteed 
+that the loop body statements are executed at least one time.
 
 ## Function Blocks
 
@@ -390,7 +451,7 @@ slightly faster because division is the slowest math operation you can use. The 
 reader’s mind as to what is being done. (Normally you would not do this anyway. It would only be
 noticeable if the calculation was being done thousands of times in a big program loop.)
 
-> [!CAUTION]
+> [!TIP]
 > **Performance Optimization for Arduino (Multiplication vs. Division)**
 >
 > **Method 1: Shift Bits for Powers of 2**
