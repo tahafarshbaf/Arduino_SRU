@@ -2,7 +2,7 @@
 
 ## History
 
-The idea of creating Arduino took shape in 2003 at the IDII [^1] in Italy. The idea was to build a simple, low-cost device for students to carry out digital projects, especially those who did not have much familiarity with the principles of engineering and programming. Three key individuals played a role in realizing this idea: Hernando Barragán, Massimo Banzi, and Casey Reas.
+The idea of creating Arduino took shape in 2003 at the IDII (Interaction Design Institute Ivrea) in Italy. The idea was to build a simple, low-cost device for students to carry out digital projects, especially those who did not have much familiarity with the principles of engineering and programming. Three key individuals played a role in realizing this idea: Hernando Barragán, Massimo Banzi, and Casey Reas.
 
 Barragán was a student at the Ivrea Institute who decided to carry out his master's thesis in this field. Banzi and Reas were Barragán's thesis advisors. At that time, the name "Arduino" did not yet exist. The outcome of Barragán's thesis was highly successful and led to the creation of hardware and software called "Wiring." The Wiring hardware possessed the desired characteristics compared to other available products on the market at the time—namely, it was simple and low-cost. The Wiring software was also based on an existing programming language called "Processing."
 
