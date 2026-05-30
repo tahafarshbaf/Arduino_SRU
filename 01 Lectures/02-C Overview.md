@@ -78,6 +78,11 @@ Relational expressions are designed to resolve to a logic true or false state, s
 a value that can be used in a program.
 
 
+All of the operators in the 
+table are binary operators and require two operands. 
+
+
+
 | Operator | Interpretation           |
 | -------- | ------------------------ |
 | >        | Greater than             |
@@ -107,11 +112,6 @@ to answer the call or not. Further, that decision involved comparing the expecte
 the call (e.g., it might be someone you want to talk with) versus the expected costs of not answering the 
 call (i.e., I may miss out on talking to someone important). Some decisions are better than others. Indeed, 
 the definition of a dilemma is when you have two or more choices and they are all bad.
-
-All of the operators in the 
-table are binary operators and require two operands. 
-
-    |
 
 
 >[!NOTE]
