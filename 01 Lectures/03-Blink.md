@@ -197,27 +197,10 @@ Program starts
 
 ## 8. Exercises & Challenges
 
-Work through these in order. Each one builds on the previous.
 
-### Exercise 1 — Change the Speed ⭐
 
-Modify the code so the LED blinks **twice as fast** (every 0.5 seconds instead of 1).  
-Then make it blink **twice as slow** (every 2 seconds).
 
-*Hint: Change the value inside `delay()`.*
-
----
-
-### Exercise 2 — Unequal Timing ⭐
-
-Make the LED turn **ON for 200 ms** but **OFF for 800 ms**.
-What does it look like compared to equal timing?
-
-*Hint: Use different values for the two `delay()` calls.*
-
----
-
-### Exercise 3 — SOS Signal ⭐⭐
+### Exercise 1 — SOS Signal ⭐⭐
 
 Morse code for SOS is: **· · · — — — · · ·**
 
@@ -231,16 +214,8 @@ Program the LED to continuously transmit the SOS signal.
 
 ---
 
-### Exercise 4 — Named Constants ⭐⭐
 
-Rewrite Version 1 of the code so that:
-- The pin number is stored in a `const int`
-- The ON time and OFF time are each stored in their own `const int`
-- Every number in `setup()` and `loop()` is replaced with a named constant
-
----
-
-### Exercise 5 — Two LEDs ⭐⭐⭐
+### Exercise 2 — Two LEDs ⭐⭐⭐
 
 Add a **second LED** (with its own resistor) to **pin 12**.
 Program them so they alternate — when one is ON, the other is OFF.
@@ -249,8 +224,7 @@ Program them so they alternate — when one is ON, the other is OFF.
 
 ---
 
-### Bonus Challenge — Heartbeat Pattern ⭐⭐⭐
+### Exercise 3 — Heartbeat Pattern ⭐⭐⭐
 
 A real heartbeat has two quick beats followed by a pause.  
-Program the LED to simulate: **flash, flash, long pause, flash, flash, long pause, ...**
----
+Program the LED to simulate: flash, flash, long pause, flash, flash, long pause, ...

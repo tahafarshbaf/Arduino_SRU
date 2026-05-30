@@ -77,6 +77,16 @@ to a value. In most languages, logic true resolves to a non-zero value (e.g., â€
 Relational expressions are designed to resolve to a logic true or false state, so they ultimately do resolve to 
 a value that can be used in a program.
 
+
+| Operator | Interpretation           |
+| -------- | ------------------------ |
+| >        | Greater than             |
+| >=       | Greater than or equal to |
+| <        | Less than                |
+| <=       | Less than or equal to    |
+| ==       | Equal to                 |
+| !=       | Not equal to         
+
 ## Statements
 A statement is a complete C instruction for the computer. All C statements end with a semicolon (;). The 
 following are examples of C statements:
@@ -101,15 +111,7 @@ the definition of a dilemma is when you have two or more choices and they are al
 All of the operators in the 
 table are binary operators and require two operands. 
 
-
-| Operator | Interpretation           |
-| -------- | ------------------------ |
-| >        | Greater than             |
-| >=       | Greater than or equal to |
-| <        | Less than                |
-| <=       | Less than or equal to    |
-| ==       | Equal to                 |
-| !=       | Not equal to             |
+    |
 
 
 >[!NOTE]
