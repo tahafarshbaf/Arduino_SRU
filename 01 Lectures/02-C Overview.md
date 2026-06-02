@@ -92,6 +92,19 @@ table are binary operators and require two operands.
 | ==       | Equal to                 |
 | !=       | Not equal to         
 
+
+
+>[!NOTE]
+> The result of all relational operations is either logic true (non-zero) or logic false (zero).
+> ```
+>5 > 4 // Logic true
+>5 < 4 // logic false
+>5 == 4 // logic false
+>5 != 4 // logic true
+>``` 
+
+
+
 ## Statements
 A statement is a complete C instruction for the computer. All C statements end with a semicolon (;). The 
 following are examples of C statements:
@@ -113,15 +126,6 @@ the call (e.g., it might be someone you want to talk with) versus the expected c
 call (i.e., I may miss out on talking to someone important). Some decisions are better than others. Indeed, 
 the definition of a dilemma is when you have two or more choices and they are all bad.
 
-
->[!NOTE]
-> The result of all relational operations is either logic true (non-zero) or logic false (zero).
-> ```
->5 > 4 // Logic true
->5 < 4 // logic false
->5 == 4 // logic false
->5 != 4 // logic true
->``` 
 
 
 
