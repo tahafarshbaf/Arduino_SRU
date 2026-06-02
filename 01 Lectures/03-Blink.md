@@ -200,7 +200,7 @@ Program starts
 
 
 
-### Exercise 1 — SOS Signal ⭐⭐
+### Exercise 1 — SOS Signal ⭐⭐⭐
 
 Morse code for SOS is: **· · · — — — · · ·**
 
@@ -215,7 +215,7 @@ Program the LED to continuously transmit the SOS signal.
 ---
 
 
-### Exercise 2 — Two LEDs ⭐⭐⭐
+### Exercise 2 — Two LEDs ⭐
 
 Add a **second LED** (with its own resistor) to **pin 12**.
 Program them so they alternate — when one is ON, the other is OFF.
