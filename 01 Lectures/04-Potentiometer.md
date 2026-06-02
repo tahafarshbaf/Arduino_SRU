@@ -196,28 +196,10 @@ void loop() {
 
 ---
 
-### Version 2 — Better
-
-```cpp
-const int POT_PIN = A0;
-const int LED_PIN = 9;
-
-void setup() {
-}
-
-void loop() {
-
-  int potValue = analogRead(POT_PIN);
-
-  int brightness = map(potValue, 0, 1023, 0, 255);
-
-  analogWrite(LED_PIN, brightness);
-}
-```
 
 ---
 
-### Version 3 — Best
+### Version 2 — Best
 
 ```cpp
 const int POT_PIN = A0;
