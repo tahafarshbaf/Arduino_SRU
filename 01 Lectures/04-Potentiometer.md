@@ -388,3 +388,33 @@ his principle is commonly used in:
 - Fuel level indicators
 - Industrial monitoring panels
 - Power bank charge displays
+
+**َAnswer**:
+```C++
+int led[] = {8,9,10,11};
+int brightness = 0;    
+
+void setup() {
+  Serial.begin(9600); 
+  
+  for(int i = 0; i <= 3; i++)
+  pinMode(led[i], OUTPUT);
+}
+void loop() {
+  int value = analogRead(A0);
+  Serial.print("Pot value: ");
+  Serial.print(value);
+  Serial.print("\n");
+  
+  for(int i = 0; i <= 3; i++)
+  digitalWrite(led[i], LOW);
+
+  int level = (value / 256);  // output = {0,1,2,3}
+
+  for (int i = 0; i <= level; i++)
+  digitalWrite(led[i], HIGH);
+
+  delay(500);
+}
+```
+پ
