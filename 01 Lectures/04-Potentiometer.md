@@ -420,7 +420,7 @@ void loop() {
 پ
 ## Potentiometer Speed Calculation
 
-```C+=
+```C++
 const int potPin = A0;
 
 int currentPosition = 0;
