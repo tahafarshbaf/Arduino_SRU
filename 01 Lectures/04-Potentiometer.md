@@ -418,3 +418,46 @@ void loop() {
 }
 ```
 پ
+## Potentiometer Speed Calculation
+
+```C+=
+const int potPin = A0;
+
+int currentPosition = 0;
+int previousPosition = 0;
+
+unsigned long currentTime =0 ;
+unsigned long previousTime = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+
+  previousTime = millis(); 
+  previousPosition = analogRead(A0);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  currentTime = millis(); 
+
+  if(currentTime - previousTime >= 100)
+  {
+    currentPosition = analogRead(A0);
+    float dt = (currentTime - previousTime) / 1000.0;
+    float speed = (currentPosition - previousPosition) / dt;
+
+    Serial.print("Position: ");
+    Serial.print(currentPosition);
+
+    Serial.print("\tSpeed:");
+    Serial.println(speed);
+
+    previousTime = currentTime;
+    previousPosition = currentPosition;
+
+  }
+
+}
+```
