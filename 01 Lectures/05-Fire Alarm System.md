@@ -197,6 +197,8 @@ Button  leg2 ───── GND
 
 ### Button Wiring: Pull-Down Resistor
 
+![pullup](/01%20Lectures/Images/pullup.png)
+
 We wire the button with a **pull-down resistor** (10 kΩ to 5V):
 
 - Button **not pressed** → Pin 2 reads **LOW** (connected to GND through resistor)
@@ -214,6 +216,7 @@ what matters is knowing which state means "pressed" in your code.
 
 During the warm-up period, we will **blink the green LED slowly** to signal to the
 user that the system is initializing. Solid green means the system is ready.
+
 
 ---
 
@@ -637,3 +640,9 @@ one `#` character per 5% of reading.
 | `tone()` | `tone(pin, frequency, duration)` | Play tone for a set duration then stop |
 | `noTone()` | `noTone(pin)` | Stop the buzzer |
 | `map()` | `map(value, fromLow, fromHigh, toLow, toHigh)` | Re-scale a value to a new range |
+
+---
+## Additional Resources
+
+
+[![YouTube](https://img.youtube.com/vi/SqONrFwa4PA/0.jpg)](https://www.youtube.com/watch?v=SqONrFwa4PA)
