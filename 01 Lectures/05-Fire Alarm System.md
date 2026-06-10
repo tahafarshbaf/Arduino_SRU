@@ -628,22 +628,6 @@ one `#` character per 5% of reading.
 
 ---
 
-## 11. Summary
-
-In this project you built a complete, real-world sensor system. You learned:
-
-- The **MQ-2 sensor** detects smoke and combustible gases by measuring a change in
-  electrical resistance, converted to an analog voltage (0–1023 on Arduino).
-- **Threshold comparison** is the fundamental pattern for turning a continuous sensor
-  reading into a binary decision (normal / alarm).
-- An **alarm latch** (`bool alarmActive`) keeps the system in alarm state until a
-  human manually resets it — a critical safety behavior.
-- `tone(pin, frequency)` and `noTone(pin)` generate sound with a passive buzzer.
-- **Sensor calibration** — finding the right threshold for your environment — is a
-  required step for any real sensor system; default values are only a starting point.
-- **Averaging multiple readings** reduces false triggers from electrical noise.
-- Real systems combine **multiple outputs** (LEDs + buzzer) to communicate urgency
-  clearly to users.
 
 ### New Functions Introduced
 
