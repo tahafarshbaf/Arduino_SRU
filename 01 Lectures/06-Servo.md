@@ -100,6 +100,10 @@ Pulse width  →  Angle
   ~2.0 ms   →  180°
 ```
 
+
+![servo_pwm](Images/Servo-Motor-Working-Timing-Diagram.webp)
+
+
 These pulses repeat about **50 times per second** (50 Hz).
 
 > **You do not need to calculate pulse widths yourself.**  
