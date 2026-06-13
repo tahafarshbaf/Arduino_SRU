@@ -343,3 +343,110 @@ center (90°).*
 
 ---
 
+## Robotic Hand Project 
+```C++
+#include <Servo.h>
+
+Servo servos[5];
+
+enum Choice { ROCK, PAPER, SCISSORS, NONE };
+
+Choice userChoice = NONE;
+Choice pcChoice = NONE;
+
+char ch;
+unsigned int user_point = 0;
+unsigned int pc_point = 0;
+
+const int pins[] = { 3, 5, 6, 9, 10 };
+const int rock[] = { 0, 0, 0, 0, 0 };
+const int paper[] = { 90, 90, 90, 90, 90 };
+const int scissors[] = { 0, 90, 90, 0, 0 };
+
+
+void calculateWinner(Choice user, Choice pc); 
+void moveFinger(const int angles[5]);
+
+void setup() {
+  Serial.begin(9600);
+  randomSeed(analogRead(A0));
+  for (int i = 0; i < 5; i++) {
+    servos[i].attach(pins[i]);
+    servos[i].write(0);
+  }
+  moveFinger(rock);
+  Serial.println("----- GAME STARTED -----");
+  Serial.println("Enter R, P or S");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    ch = toupper(Serial.read());
+
+    switch (ch) {
+      case 'R': userChoice = ROCK; break;
+      case 'P': userChoice = PAPER; break;
+      case 'S': userChoice = SCISSORS; break;
+      default: userChoice = NONE; break;
+    }
+
+    if (userChoice == NONE) {
+      Serial.println("Invalid input! Use R, P or S");
+      return;
+    }
+
+    pcChoice = static_cast<Choice>(random(0, 3));
+    
+
+    switch (pcChoice) {
+    case ROCK:
+        moveFinger(rock);
+        break;
+    case PAPER:
+        moveFinger(paper);
+        break;
+    case SCISSORS:
+        moveFinger(scissors);
+        break;
+    }  
+
+    delay(100);
+
+   
+    calculateWinner(userChoice, pcChoice);
+
+    if (user_point >= 3 || pc_point >= 3) {
+      Serial.println("\n----- FINISHED -----");
+      if (user_point > pc_point) Serial.println("You Win The Game!");
+      else Serial.println("PC Wins The Game!");
+      user_point = 0; pc_point = 0;
+      Serial.println("\n----- NEW GAME -----");
+    }
+  }
+}
+
+void calculateWinner(Choice user, Choice pc) {
+  int result = (3 + user - pc) % 3;
+  if (result == 1) user_point++;
+  else if (result == 2) pc_point++;
+
+  Serial.print("You: "); 
+  Serial.print(ch);
+  Serial.print("\tPC: "); 
+  
+  switch(pc) {
+    case ROCK: Serial.print("ROCK"); break;
+    case PAPER: Serial.print("PAPER"); break;
+    case SCISSORS: Serial.print("SCISSORS"); break;
+  }
+  
+  Serial.print("\tScore: "); 
+  Serial.print(user_point);
+  Serial.print("-"); 
+  Serial.println(pc_point);
+}
+
+void moveFinger(const int angles[5]) {
+  for (int i = 0; i < 5; i++) servos[i].write(angles[i]);
+}
+```
