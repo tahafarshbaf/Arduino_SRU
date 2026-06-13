@@ -1,4 +1,4 @@
-# Project 03 — Servo Motor: Controlling Position with Code
+# Project 06 — Servo Motor: Controlling Position with Code
 
 *Servo* motors are a special type of motor that don’t spin around in a circle, but 
 move to a specific position and stay there until you tell them to move again. 
