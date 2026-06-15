@@ -202,7 +202,7 @@ changes caused by one component from affecting the rest of the circuit. They act
 a small local energy reservoir — they absorb the sudden demand so the main supply
 doesn't dip.
 
-> ⚠️ **SAFETY — Read carefully:**  
+> [!CAUTION]
 > Electrolytic capacitors are **polarized** — they must be connected the right way around.  
 > - The **anode (+)** longer leg → connect to **5V**  
 > - The **cathode (–)** shorter leg, marked with a **black stripe** → connect to **GND**  
@@ -221,7 +221,7 @@ Always share a common **GND** between Arduino and the external supply.
 
 ## 6. The Code
 
-### Version 1 — Sweep (Back and Forth)
+### Sweep (Back and Forth)
 
 ```cpp
 #include <Servo.h>              // Include the Servo library
@@ -251,66 +251,7 @@ void loop() {
 
 ---
 
-### Version 2 — Jump to Specific Positions
 
-```cpp
-#include <Servo.h>
-
-const int SERVO_PIN = 9;
-
-Servo myServo;
-
-void setup() {
-  myServo.attach(SERVO_PIN);
-}
-
-void loop() {
-  myServo.write(0);      // Move to 0° (fully left)
-  delay(1000);
-
-  myServo.write(90);     // Move to 90° (center)
-  delay(1000);
-
-  myServo.write(180);    // Move to 180° (fully right)
-  delay(1000);
-
-  myServo.write(90);     // Return to center
-  delay(1000);
-}
-```
-
----
-
-### Version 3 — Button-Controlled Servo *(uses Project 02 knowledge)*
-
-```cpp
-#include <Servo.h>
-
-const int SERVO_PIN  = 9;
-const int BUTTON_PIN = 2;
-
-Servo myServo;
-
-void setup() {
-  myServo.attach(SERVO_PIN);
-  pinMode(BUTTON_PIN, INPUT_PULLUP);  // Built-in pull-up resistor
-}
-
-void loop() {
-  int buttonState = digitalRead(BUTTON_PIN);
-
-  if (buttonState == LOW) {       // Button pressed (INPUT_PULLUP: LOW = pressed)
-    myServo.write(180);
-  } else {                        // Button not pressed
-    myServo.write(0);
-  }
-}
-```
-
-> This version shows how projects build on each other: we combine what we learned
-> about buttons (Project 02) with the new servo control.
-
----
 
 ### Why `delay(15)` in the Sweep?
 
@@ -326,7 +267,7 @@ Try `delay(5)` for a fast sweep or `delay(50)` for a very slow sweep.
 ## 8. Exercises & Challenges
 
 
-### Bonus Challenge — Pendulum ⭐⭐⭐
+### Pendulum ⭐⭐⭐
 
 Make the servo behave like a swinging pendulum with **easing**:
 - It accelerates from the center outward (small delay → large delay)
@@ -334,6 +275,21 @@ Make the servo behave like a swinging pendulum with **easing**:
 
 *Hint: The delay value should be proportional to how close the angle is to the
 center (90°).*
+
+---
+
+### Exercise 2 — CW / CCW Servo Control ⭐⭐
+
+Use two push buttons to move the servo in **clockwise** and **counter-clockwise**
+directions.
+
+Requirements:
+* Button 1 moves the servo a little farther in the clockwise direction.
+* Button 2 moves the servo a little farther in the counter-clockwise direction.
+* Keep the servo angle between **0° and 180°**.
+* Use `digitalRead()` to check the buttons and `if` statements to change the angle.
+
+
 
 ---
 
