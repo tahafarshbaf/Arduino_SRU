@@ -24,9 +24,6 @@ We will connect a **servo motor** to the Arduino and control its exact angle usi
 First we will sweep it slowly from **0° to 180° and back**, then we will make it jump
 to specific positions on command.
 
-Unlike the LED in Project 01 (which was either ON or OFF), a servo motor can be
-told to move to **any angle** between 0° and 180°. This is our first experience with
-**precise, analog-style control** of a physical mechanism.
 
 ---
 
@@ -66,9 +63,9 @@ By the end of this project you will be able to:
 | **Red** | 5V | Power |
 | **Orange** or Yellow or White | Signal pin (e.g., pin 9) | Control signal |
 
-> ⚠️ **Wire colors vary by brand.** Always check the datasheet for your specific servo.
+> [!TIP]
+> **Wire colors vary by brand.** Always check the datasheet for your specific servo.
 > The signal wire is always the one that is NOT red or black/brown.
-
 ---
 
 ## 4. Key Concepts
