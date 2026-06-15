@@ -11,13 +11,6 @@ and 2000 microseconds. While it’s possible to write code to generate these pul
 the Arduino software comes with a library that allows you to easily control the motor
 
 
-## Schematics
-![servo](Images/servo.jpg)
-
-
-
-
-
 ## 1. What Are We Building?
 
 We will connect a **servo motor** to the Arduino and control its exact angle using code.
@@ -51,9 +44,6 @@ By the end of this project you will be able to:
 | 1 | USB cable | To connect Arduino to computer |
 | 1 | External 5V power supply *(optional)* | Needed only if using 2+ servos |
 
-> **No resistor needed!**  
-> Unlike LEDs, servo motors have built-in control electronics.
-> They connect directly to power, ground, and a signal pin.
 
 ### Servo Motor Wire Colors
 
@@ -84,6 +74,8 @@ A servo says: *"Go to exactly 90° and stay there."*
 
 **Common uses:** robot arms, RC car steering, camera gimbals, door locks, animatronics.
 
+![servo_gemini](Images/servo_gemini.png)
+
 ### 4.2 How Does a Servo Know Its Angle? — PWM
 
 Arduino communicates with the servo using **PWM (Pulse Width Modulation)**.
@@ -103,7 +95,8 @@ Pulse width  →  Angle
 
 These pulses repeat about **50 times per second** (50 Hz).
 
-> **You do not need to calculate pulse widths yourself.**  
+> [!TIP]
+> You do not need to calculate pulse widths yourself. 
 > The Servo library handles all of this. You simply write `.write(90)` and the
 > library figures out the correct pulse width automatically.
 
