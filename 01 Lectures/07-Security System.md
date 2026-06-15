@@ -1,26 +1,5 @@
 # Project 07 — Security System: Keypad, LCD & Persistent User Database
 
-> **Course Level:** Complete Beginner  
-> **Estimated Class Time:** 120–150 minutes (may be split across two sessions)  
-> **Board:** Arduino Uno (or any compatible board)  
-> **Prior Knowledge:** `pinMode()`, `digitalWrite()`, arrays, `enum`, `switch/case`, functions, `bool`, `String`, `tone()`/`noTone()`, `millis()`-free `delay()` usage
-
----
-
-## Table of Contents
-
-1. [What Are We Building?](#1-what-are-we-building)
-2. [What Will You Learn?](#2-what-will-you-learn)
-3. [Components Needed](#3-components-needed)
-4. [Key Concepts](#4-key-concepts)
-5. [Hardware Setup](#5-hardware-setup)
-6. [The Code](#6-the-code)
-7. [How the Code Works — Step by Step](#7-how-the-code-works--step-by-step)
-8. [Exercises & Challenges](#8-exercises--challenges)
-9. [Common Mistakes & Troubleshooting](#9-common-mistakes--troubleshooting)
-10. [Summary](#10-summary)
-
----
 
 ## 1. What Are We Building?
 
