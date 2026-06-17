@@ -1,4 +1,4 @@
-# Arduino_SRU — Hands on Arduino!
+# Hands on Arduino!
 
 **Beginner Arduino programming course — Shahid Rajaei University**
 
