@@ -62,7 +62,7 @@ By the end of this project you will be able to:
 | Several | Jumper wires | |
 | 1 | USB cable | |
 
-> **Why I2C LCD instead of a regular parallel LCD?**  
+> [!IMPORTANT]  
 > A standard 16×2 LCD needs **6+ digital pins**. Our keypad already needs **8 pins**.
 > An I2C backpack reduces the LCD to just **2 signal wires (SDA, SCL)** — freeing up
 > almost all of the Arduino's pins for the keypad and LEDs.
@@ -93,7 +93,7 @@ talk to multiple devices on the same two wires without confusion. The `Wire` lib
 (built into Arduino) handles the low-level protocol — we rarely call it directly,
 but library authors use it internally.
 
-> **Finding your LCD's address:**  
+> [!NOTE]  
 > Most I2C LCD backpacks use address `0x27` or `0x3F`. If your LCD shows nothing,
 > see the **I2C Scanner** tool in Section 5.
 
@@ -141,6 +141,7 @@ lcd.setCursor(0, 1);
 lcd.print("> ");
 ```
 
+> [!NOTE]
 > Unlike `Serial.println()`, the LCD does **not** scroll or wrap automatically.
 > Text that goes past column 15 simply disappears. Always call `lcd.clear()`
 > before drawing a new screen to avoid leftover characters.
@@ -184,6 +185,7 @@ Reading a key press is a single line:
 char key = keypad.getKey();   // Returns the character, or NO_KEY (0) if nothing pressed
 ```
 
+> [!WARNING] 
 > **`if (key)`** works because `NO_KEY` is defined as `0`, and `0` is `false` in
 > a boolean context — so `if (key)` is `true` only when a real key was pressed.
 
@@ -208,7 +210,8 @@ Arduino Uno has **1024 bytes** of EEPROM.
 | `EEPROM.put(address, variable)` | Writing any data type (int, float, etc.) | Only writes if the value actually changed |
 | `EEPROM.get(address, variable)` | Reading any data type | |
 
-> ⚠️ **EEPROM has a limited lifespan**: approximately **100,000 write cycles**
+> [!CAUTION] 
+> EEPROM has a limited lifespan, approximately **100,000 write cycles**
 > per memory cell. `EEPROM.put()` checks whether the value has changed before
 > writing, automatically protecting the chip. Avoid calling `EEPROM.write()`
 > repeatedly in a loop with changing values.
@@ -315,6 +318,7 @@ int value = inputBuffer.toInt();  // Convert "1234" → 1234
 inputBuffer = "";                 // Clear for next entry
 ```
 
+> [!NOTE]
 > **Limitation to be aware of:** `"0012".toInt()` returns `12`, not `0012`. If a
 > PIN is stored as `12` and the user types `"0012"`, it will still match — both
 > become `12` after `toInt()`. This is consistent (both sides go through the same
