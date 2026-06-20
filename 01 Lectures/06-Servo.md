@@ -1,4 +1,4 @@
-# Project 03 — Servo Motor: Controlling Position with Code
+# Project 06 — Servo Motor: Controlling Position with Code
 
 *Servo* motors are a special type of motor that don’t spin around in a circle, but 
 move to a specific position and stay there until you tell them to move again. 
@@ -11,22 +11,12 @@ and 2000 microseconds. While it’s possible to write code to generate these pul
 the Arduino software comes with a library that allows you to easily control the motor
 
 
-## Schematics
-![servo](Images/servo.jpg)
-
-
-
-
-
 ## 1. What Are We Building?
 
 We will connect a **servo motor** to the Arduino and control its exact angle using code.
 First we will sweep it slowly from **0° to 180° and back**, then we will make it jump
 to specific positions on command.
 
-Unlike the LED in Project 01 (which was either ON or OFF), a servo motor can be
-told to move to **any angle** between 0° and 180°. This is our first experience with
-**precise, analog-style control** of a physical mechanism.
 
 ---
 
@@ -54,9 +44,6 @@ By the end of this project you will be able to:
 | 1 | USB cable | To connect Arduino to computer |
 | 1 | External 5V power supply *(optional)* | Needed only if using 2+ servos |
 
-> **No resistor needed!**  
-> Unlike LEDs, servo motors have built-in control electronics.
-> They connect directly to power, ground, and a signal pin.
 
 ### Servo Motor Wire Colors
 
@@ -66,9 +53,9 @@ By the end of this project you will be able to:
 | **Red** | 5V | Power |
 | **Orange** or Yellow or White | Signal pin (e.g., pin 9) | Control signal |
 
-> ⚠️ **Wire colors vary by brand.** Always check the datasheet for your specific servo.
+> [!TIP]
+> **Wire colors vary by brand.** Always check the datasheet for your specific servo.
 > The signal wire is always the one that is NOT red or black/brown.
-
 ---
 
 ## 4. Key Concepts
@@ -86,6 +73,8 @@ This is fundamentally different from a regular DC motor, which just spins contin
 A servo says: *"Go to exactly 90° and stay there."*
 
 **Common uses:** robot arms, RC car steering, camera gimbals, door locks, animatronics.
+
+![servo_gemini](Images/servo_gemini.png)
 
 ### 4.2 How Does a Servo Know Its Angle? — PWM
 
@@ -106,7 +95,8 @@ Pulse width  →  Angle
 
 These pulses repeat about **50 times per second** (50 Hz).
 
-> **You do not need to calculate pulse widths yourself.**  
+> [!TIP]
+> You do not need to calculate pulse widths yourself. 
 > The Servo library handles all of this. You simply write `.write(90)` and the
 > library figures out the correct pulse width automatically.
 
@@ -187,6 +177,7 @@ Arduino               Servo Motor
 Pin 9 is a **PWM-capable pin**. On Arduino Uno, PWM pins are marked with a tilde
 symbol (**~**): pins 3, 5, 6, 9, 10, and 11.
 
+> [!WARNING]
 > The Servo library can technically use any digital pin, but using a PWM pin
 > is best practice and guarantees compatibility.
 
@@ -212,7 +203,7 @@ changes caused by one component from affecting the rest of the circuit. They act
 a small local energy reservoir — they absorb the sudden demand so the main supply
 doesn't dip.
 
-> ⚠️ **SAFETY — Read carefully:**  
+> [!CAUTION]
 > Electrolytic capacitors are **polarized** — they must be connected the right way around.  
 > - The **anode (+)** longer leg → connect to **5V**  
 > - The **cathode (–)** shorter leg, marked with a **black stripe** → connect to **GND**  
@@ -231,7 +222,7 @@ Always share a common **GND** between Arduino and the external supply.
 
 ## 6. The Code
 
-### Version 1 — Sweep (Back and Forth)
+### Sweep (Back and Forth)
 
 ```cpp
 #include <Servo.h>              // Include the Servo library
@@ -261,66 +252,7 @@ void loop() {
 
 ---
 
-### Version 2 — Jump to Specific Positions
 
-```cpp
-#include <Servo.h>
-
-const int SERVO_PIN = 9;
-
-Servo myServo;
-
-void setup() {
-  myServo.attach(SERVO_PIN);
-}
-
-void loop() {
-  myServo.write(0);      // Move to 0° (fully left)
-  delay(1000);
-
-  myServo.write(90);     // Move to 90° (center)
-  delay(1000);
-
-  myServo.write(180);    // Move to 180° (fully right)
-  delay(1000);
-
-  myServo.write(90);     // Return to center
-  delay(1000);
-}
-```
-
----
-
-### Version 3 — Button-Controlled Servo *(uses Project 02 knowledge)*
-
-```cpp
-#include <Servo.h>
-
-const int SERVO_PIN  = 9;
-const int BUTTON_PIN = 2;
-
-Servo myServo;
-
-void setup() {
-  myServo.attach(SERVO_PIN);
-  pinMode(BUTTON_PIN, INPUT_PULLUP);  // Built-in pull-up resistor
-}
-
-void loop() {
-  int buttonState = digitalRead(BUTTON_PIN);
-
-  if (buttonState == LOW) {       // Button pressed (INPUT_PULLUP: LOW = pressed)
-    myServo.write(180);
-  } else {                        // Button not pressed
-    myServo.write(0);
-  }
-}
-```
-
-> This version shows how projects build on each other: we combine what we learned
-> about buttons (Project 02) with the new servo control.
-
----
 
 ### Why `delay(15)` in the Sweep?
 
@@ -336,7 +268,7 @@ Try `delay(5)` for a fast sweep or `delay(50)` for a very slow sweep.
 ## 8. Exercises & Challenges
 
 
-### Bonus Challenge — Pendulum ⭐⭐⭐
+### Pendulum ⭐⭐⭐
 
 Make the servo behave like a swinging pendulum with **easing**:
 - It accelerates from the center outward (small delay → large delay)
@@ -344,6 +276,102 @@ Make the servo behave like a swinging pendulum with **easing**:
 
 *Hint: The delay value should be proportional to how close the angle is to the
 center (90°).*
+
+---
+
+### Exercise 2 — CW / CCW Servo Control ⭐⭐
+
+Use two push buttons to move the servo in **clockwise** and **counter-clockwise**
+directions.
+
+Requirements:
+* Button 1 moves the servo a little farther in the clockwise direction.
+* Button 2 moves the servo a little farther in the counter-clockwise direction.
+* Keep the servo angle between **0° and 180°**.
+* Use `digitalRead()` to check the buttons and `if` statements to change the angle.
+
+
+
+---
+## Useful String & Char Functions
+
+# Arduino String, Character, and Serial Functions
+
+| Category | Function | Description |
+|----------|----------|-------------|
+| Serial | `Serial.available()` | Returns the number of bytes available in the serial buffer. |
+| Serial | `Serial.read()` | Reads one byte (character) from the serial buffer. |
+| Serial | `Serial.readString()` | Reads all available serial data into a `String`. |
+| Serial | `Serial.readStringUntil(delimiter)` | Reads serial data until the specified delimiter is found. |
+| Serial | `Serial.peek()` | Returns the next byte without removing it from the buffer. |
+| Serial | `Serial.parseInt()` | Reads serial data and converts it to an integer. |
+| Serial | `Serial.parseFloat()` | Reads serial data and converts it to a float. |
+| Serial | `Serial.find(target)` | Searches for a target string in the incoming serial data. |
+| Serial | `Serial.findUntil(target, terminator)` | Searches for a target string until a terminator is found. |
+| Serial | `Serial.setTimeout(ms)` | Sets the timeout for serial reading functions. |
+| Serial | `Serial.print()` | Prints data to the serial port. |
+| Serial | `Serial.println()` | Prints data followed by a newline. |
+| Character | `isAlpha(c)` | Returns true if `c` is a letter. |
+| Character | `isAlphaNumeric(c)` | Returns true if `c` is a letter or digit. |
+| Character | `isAscii(c)` | Returns true if `c` is a valid ASCII character. |
+| Character | `isControl(c)` | Returns true if `c` is a control character. |
+| Character | `isDigit(c)` | Returns true if `c` is a digit. |
+| Character | `isGraph(c)` | Returns true if `c` is printable except space. |
+| Character | `isHexadecimalDigit(c)` | Returns true if `c` is a hexadecimal digit. |
+| Character | `isLowerCase(c)` | Returns true if `c` is lowercase. |
+| Character | `isPrintable(c)` | Returns true if `c` is printable. |
+| Character | `isPunct(c)` | Returns true if `c` is punctuation. |
+| Character | `isSpace(c)` | Returns true if `c` is whitespace. |
+| Character | `isUpperCase(c)` | Returns true if `c` is uppercase. |
+| Character | `isWhitespace(c)` | Returns true if `c` is a whitespace character. |
+| Character | `tolower(c)` | Converts a character to lowercase. |
+| Character | `toupper(c)` | Converts a character to uppercase. |
+| String | `str.length()` | Returns the number of characters in the string. |
+| String | `str.isEmpty()` | Returns true if the string is empty. |
+| String | `str.charAt(index)` | Returns the character at the specified index. |
+| String | `str.setCharAt(index, c)` | Replaces the character at the specified index. |
+| String | `str[index]` | Accesses a character using array notation. |
+| String | `str.concat(value)` | Appends data to the end of the string. |
+| String | `str += value` | Appends data using the `+=` operator. |
+| String | `str.equals(other)` | Compares two strings for equality. |
+| String | `str.equalsIgnoreCase(other)` | Compares two strings ignoring case. |
+| String | `str.compareTo(other)` | Lexicographically compares two strings. |
+| String | `str.startsWith(prefix)` | Checks whether the string starts with a prefix. |
+| String | `str.endsWith(suffix)` | Checks whether the string ends with a suffix. |
+| String | `str.indexOf(value)` | Finds the first occurrence of a character or substring. |
+| String | `str.indexOf(value, fromIndex)` | Finds the first occurrence starting from an index. |
+| String | `str.lastIndexOf(value)` | Finds the last occurrence of a character or substring. |
+| String | `str.lastIndexOf(value, fromIndex)` | Finds the last occurrence before an index. |
+| String | `str.substring(start)` | Returns a substring from the specified start index. |
+| String | `str.substring(start, end)` | Returns a substring between two indexes. |
+| String | `str.replace(find, replace)` | Replaces occurrences of a substring. |
+| String | `str.remove(index)` | Removes characters from an index to the end. |
+| String | `str.remove(index, count)` | Removes a specified number of characters. |
+| String | `str.toLowerCase()` | Converts the string to lowercase. |
+| String | `str.toUpperCase()` | Converts the string to uppercase. |
+| String | `str.trim()` | Removes leading and trailing whitespace. |
+| String | `str.toInt()` | Converts the string to an integer. |
+| String | `str.toFloat()` | Converts the string to a float. |
+| String | `str.getBytes(buffer, length)` | Copies string data into a byte array. |
+| String | `str.toCharArray(buffer, length)` | Copies string data into a character array. |
+| String | `str.c_str()` | Returns a pointer to the internal C-string. |
+| String | `str.reserve(size)` | Reserves memory for the string. |
+| C-String (`char[]`) | `strlen(str)` | Returns the length of a C-string. |
+| C-String (`char[]`) | `strcpy(dest, src)` | Copies one string to another. |
+| C-String (`char[]`) | `strncpy(dest, src, n)` | Copies up to `n` characters. |
+| C-String (`char[]`) | `strcat(dest, src)` | Concatenates strings. |
+| C-String (`char[]`) | `strncat(dest, src, n)` | Concatenates up to `n` characters. |
+| C-String (`char[]`) | `strcmp(a, b)` | Compares two strings. |
+| C-String (`char[]`) | `strncmp(a, b, n)` | Compares up to `n` characters. |
+| C-String (`char[]`) | `strchr(str, c)` | Finds the first occurrence of a character. |
+| C-String (`char[]`) | `strrchr(str, c)` | Finds the last occurrence of a character. |
+| C-String (`char[]`) | `strstr(str, sub)` | Finds a substring. |
+| C-String (`char[]`) | `strtok(str, delim)` | Splits a string into tokens. |
+| C-String (`char[]`) | `atoi(str)` | Converts a string to an integer. |
+| C-String (`char[]`) | `atol(str)` | Converts a string to a long integer. |
+| C-String (`char[]`) | `atof(str)` | Converts a string to a float. |
+| C-String (`char[]`) | `sprintf(buffer, format, ...)` | Formats data into a string. |
+| C-String (`char[]`) | `snprintf(buffer, size, format, ...)` | Safe version of `sprintf()`. |
 
 ---
 
