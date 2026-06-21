@@ -536,8 +536,7 @@ void checkPassword() {
 **Try it:** The default PIN is `1234`. Enter `1`, `2`, `3`, `4`, then `#`.
 
 
-<video src="../Images/Security_System.mp4" width="600" autoplay loop muted playsinline></video>
-
+![video](../Images/secsys.gif)
 
 ---
 
