@@ -71,7 +71,7 @@ Both sensors work on the same principle and use the same code. Common difference
 
 The SRF04 measures distance using the **speed of sound**, the same way bats navigate.
 
-[![عنوان ویدیو](https://img.youtube.com/vi/شناسه_ویدیو/hqdefault.jpg)](https://www.youtube.com/watch?v=iwD9RiqIHQw)
+[![HC-SRF](https://img.youtube.com/vi/iwD9RiqIHQw/hqdefault.jpg)](https://www.youtube.com/watch?v=iwD9RiqIHQw)
 
 **Step-by-step:**
 
@@ -109,7 +109,8 @@ long duration = pulseIn(echoPin, HIGH);
 | `HIGH` | Wait for the pin to go HIGH, then measure until it goes LOW |
 | Return value | Duration in microseconds (µs) as a `long` |
 
-> **Why `long` and not `int`?**  
+>[!NOTE] 
+**Why `long` and not `int`?**  
 > An `int` on Arduino holds values up to ~32,767. A 3-meter echo takes ~17,500 µs —
 > already close to the limit. `long` holds up to ~2,147,000,000, making it safe
 > for any realistic distance. Always use `long` for `pulseIn()` results.
@@ -168,7 +169,8 @@ spikes motors produce when switching.
 | LOW | any | any | Coasts (free spins) |
 | PWM (0–255) | HIGH | LOW | Forward at variable speed |
 
-> **ENA with `analogWrite()`:** Since ENA accepts PWM, you can control motor
+>[!IMPORTANT] 
+>**ENA with `analogWrite()`:** Since ENA accepts PWM, you can control motor
 > speed by writing a value from 0 (stopped) to 255 (full speed), just like
 > controlling LED brightness — but driving a motor instead.
 
@@ -189,8 +191,6 @@ The motor's speed is (approximately) proportional to the average voltage it rece
 This lets us run the pump at a **reduced speed** if needed, rather than always at
 full power.
 
-> **PWM-capable pins on Arduino Uno:** 3, 5, 6, 9, 10, 11 (marked with **~**).
-> ENA must connect to one of these pins for speed control to work.
 
 ### 4.6 Water Level Calculation
 
@@ -398,108 +398,18 @@ Pin 8 │VS         ENA│ Pin 9
        (top view, notch at top)
 ```
 
-> We only use the **left channel** (pins 1–8) for one motor.
+>[!NOTE] 
+We only use the **left channel** (pins 1–8) for one motor.
 > Pins 9–16 control a second motor and can be left unconnected.
 
-### Physical Tank Setup
+### What is Hysteresis?
+ ![hysteresis](Images/hysteresis.png)
 
-```
- ┌─────────────────────────────────┐
- │           [SRF04 sensor]        │  ← sensor mounted at top, pointing down
- │               ↕ distance        │
- │                                 │
- │  ┈┈┈┈┈┈┈┈┈┈┈┈┈ water surface   │
- │                                 │
- │   water level = height − dist   │
- │                                 │
- └─────────────────────────────────┘
-                ↑
-           [DC Pump / Motor]
-           (controlled by L293D)
-```
-
----
 
 ## 6. The Code
 
-### Version 1 — Simple On/Off Control (No Hysteresis)
 
-```cpp
-// ── Pin Definitions ──────────────────────────────────────────
-const int TRIG_PIN   = 9;
-const int ECHO_PIN   = 10;
-const int ENABLE_PIN = 3;    // PWM — controls motor speed
-const int IN1_PIN    = 4;    // Direction A
-const int IN2_PIN    = 5;    // Direction B
-
-// ── Tank Parameters ───────────────────────────────────────────
-const float TANK_HEIGHT  = 30.0;    // cm — full height of the tank
-const float TARGET_LEVEL = 15.0;    // cm — desired water level
-
-void setup() {
-  Serial.begin(9600);
-
-  pinMode(TRIG_PIN,   OUTPUT);
-  pinMode(ECHO_PIN,   INPUT);
-  pinMode(ENABLE_PIN, OUTPUT);
-  pinMode(IN1_PIN,    OUTPUT);
-  pinMode(IN2_PIN,    OUTPUT);
-
-  // Start with motor OFF
-  digitalWrite(IN1_PIN, LOW);
-  digitalWrite(IN2_PIN, LOW);
-  analogWrite(ENABLE_PIN, 0);
-
-  Serial.println("=== Tank Level Controller (Simple) ===");
-}
-
-void loop() {
-  // ── 1. Trigger the sensor ────────────────────────────────
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-
-  // ── 2. Measure echo duration ──────────────────────────────
-  long duration  = pulseIn(ECHO_PIN, HIGH);
-  float distance = duration * 0.034 / 2.0;        // µs → cm
-
-  // ── 3. Calculate water level ──────────────────────────────
-  float waterLevel = TANK_HEIGHT - distance;
-  waterLevel = constrain(waterLevel, 0, TANK_HEIGHT);
-
-  Serial.print("Distance: ");  Serial.print(distance);
-  Serial.print(" cm | Level: "); Serial.print(waterLevel);
-  Serial.print(" cm | ");
-
-  // ── 4. Simple on/off control (no hysteresis) ─────────────
-  if (waterLevel < TARGET_LEVEL) {
-    // Level too low → pump ON
-    digitalWrite(IN1_PIN, HIGH);
-    digitalWrite(IN2_PIN, LOW);
-    analogWrite(ENABLE_PIN, 200);
-    Serial.println("Pump: ON");
-  } else {
-    // Level reached → pump OFF
-    digitalWrite(IN1_PIN, LOW);
-    digitalWrite(IN2_PIN, LOW);
-    analogWrite(ENABLE_PIN, 0);
-    Serial.println("Pump: OFF");
-  }
-
-  delay(500);
-}
-```
-
-**The problem with Version 1:** When `waterLevel` hovers exactly around `TARGET_LEVEL`,
-the pump switches ON and OFF every 500 ms. This is chattering. To see this, imagine
-the level slowly rising through 15.0 cm — every reading near the boundary toggles
-the pump. Version 2 fixes this with hysteresis.
-
----
-
-### Version 2 — Hysteresis Control (Production-Ready)
+### Version 1 — Hysteresis Control (Production-Ready)
 
 ```cpp
 // ── Pin Definitions ──────────────────────────────────────────
@@ -614,7 +524,7 @@ void printStatus(float distance, float waterLevel) {
 
 ---
 
-### Version 3 — Using the NewPing Library
+### Version 2 — Using the NewPing Library
 
 > **Install first:** Sketch → Include Library → Manage Libraries → search `NewPing` → Install
 
@@ -737,10 +647,7 @@ without any extra code on your part.
 
 ---
 
-### Version 4 — Using the SRF04 Library
-
-> **Install first:** Sketch → Include Library → Manage Libraries → search `SRF04` → Install  
-> *(Author: Garfield Lee)*
+### Version 3 — Using the SRF04 Library
 
 This is the most concise version. The SRF04 library reduces all sensor communication
 to a single method call and is purpose-built for Devantech SRF-series sensors.
@@ -823,57 +730,10 @@ void printStatus(float distance, float waterLevel) {
 }
 ```
 
-### Side-by-Side Comparison of All Four Versions
-
-| | Version 1 | Version 2 | Version 3 | Version 4 |
-|--|-----------|-----------|-----------|-----------|
-| **Library** | None | None | NewPing | SRF04 |
-| **Hysteresis** | ❌ No | ✅ Yes | ✅ Yes | ✅ Yes |
-| **Functions** | Inline in `loop()` | Separate functions | Separate functions | Separate functions |
-| **Timeout handling** | ❌ Silent wrong value | ❌ Silent wrong value | ✅ Returns 0 | ⚠️ Library-dependent |
-| **Noise filtering** | ❌ None | ❌ None | ✅ `ping_median()` | ❌ None |
-| **Lines of sensing code** | ~6 lines | ~6 lines in function | **1 line** | **1 line** |
-| **Best for** | Learning physics | Clean production code | Real projects | SRF-specific projects |
-
-### Control Loop Diagram
-
-```
-loop() runs every 500 ms:
-          │
-          ▼
-  measureDistance()
-  ┌────────────────────────────────────────┐
-  │  TRIG LOW  (2 µs)                      │
-  │  TRIG HIGH (10 µs)  → sound burst      │
-  │  TRIG LOW                              │
-  │  pulseIn(ECHO, HIGH) → duration (µs)   │
-  │  distance = duration × 0.034 / 2       │
-  └─────────────────┬──────────────────────┘
-                    │
-                    ▼
-  calculateWaterLevel(distance)
-  ┌──────────────────────────────┐
-  │  level = TANK_HEIGHT - dist  │
-  │  level = constrain(level,    │
-  │            0, TANK_HEIGHT)   │
-  └────────────┬─────────────────┘
-               │
-               ▼
-  controlPump(waterLevel)
-               │
-    ┌──────────┴──────────┐
-    │                     │
-level < (target - 2.0) ?  level > (target + 2.0) ?
-    │                     │                │
-   YES                   YES          neither (dead zone)
-    │                     │                │
-  motorOn()          motorOff()      no change
-  motorState=true    motorState=false
-```
 
 ### Why `motorState` Is Stored as a Global Variable
 
-In Version 2, `motorState` is never used to decide whether to run or stop the motor —
+In Version 1, `motorState` is never used to decide whether to run or stop the motor —
 `controlPump()` calls `motorOn()` and `motorOff()` directly. So why keep it?
 
 It is used **only for display** in the dead-zone branch:
@@ -886,7 +746,8 @@ This tells us what the pump is actually doing while the controller is holding
 state. Without this variable, we could not print the pump's current condition
 from within the "no change" branch.
 
-> **Ternary operator `? :`** — a compact `if/else` for expressions:
+>[!TIP]
+ **Ternary operator `? :`** — a compact `if/else` for expressions:
 > ```cpp
 > motorState ? "ON" : "OFF"
 > // if motorState is true → "ON", else → "OFF"
@@ -896,31 +757,6 @@ from within the "no change" branch.
 > if (motorState) { return "ON"; } else { return "OFF"; }
 > ```
 
-### Hysteresis Behavior — Visual Timeline
-
-```
-Level (cm)
- 154 │
- 152 │─────── OFF threshold ───────────────────────────
-     │                    ╲
- 150 │  ─ ─ ─ ─ target ─ ─╲─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
-     │                     ╲           ╱
- 148 │─────── ON threshold ──╲────────╱──────────────────
-     │                        ╲      ╱
- 146 │                         ╲    ╱
-     │                          ╲  ╱
- 144 │                           ╲╱
-     │
-     └──────────────────────────────────────────── time
-        ↑ pump ON              ↑ pump OFF at 152 cm
-        at 148 cm
-```
-
-Once triggered ON at 148 cm, the pump keeps running through the 148–152 cm dead
-zone until the level reaches 152 cm. It then stays OFF until the level drops back
-to 148 cm. This creates a stable, predictable cycle with no chattering.
-
----
 
 ## 8. Exercises & Challenges
 
@@ -1012,97 +848,6 @@ unsigned int  min = t / 60;
 
 ---
 
-## 9. Common Mistakes & Troubleshooting
-
-### Sensor Reads 0 or Very Large Distance
-
-| Possible Cause | Solution |
-|----------------|----------|
-| TRIG and ECHO pins swapped | TRIG is OUTPUT (you drive it), ECHO is INPUT (you read it) |
-| TRIG pulse too short or missing | Confirm `delayMicroseconds(10)` is between HIGH and LOW |
-| Object too close (< 3 cm) | SRF04 minimum range is ~3 cm; mount sensor higher |
-| No object in range | `pulseIn` times out and returns 0 — add a check: `if (duration == 0) return -1;` |
-| Loose wire on ECHO | `pulseIn()` waits forever if ECHO never goes HIGH — check wiring |
-
----
-
-### Calculated Distance Is Wrong
-
-| Possible Cause | Solution |
-|----------------|----------|
-| Missing `/2` | Sound travels to target AND back — round trip = 2× distance |
-| Using wrong speed of sound | Use `0.034` cm/µs (343 m/s at ~20°C room temperature) |
-| `duration` is `int` not `long` | Overflow for distances > 32 cm; always use `long duration` |
-
----
-
-### Motor Doesn't Spin
-
-| Possible Cause | Solution |
-|----------------|----------|
-| ENA pin not on a PWM pin | Must use pin 3, 5, 6, 9, 10, or 11 for `analogWrite()` |
-| External power not connected to L293D pin 8 (VS) | Arduino 5V alone cannot power the motor |
-| GND not shared between Arduino and external supply | Connect both GNDs together |
-| `analogWrite(ENABLE_PIN, 0)` still in effect | Check that `motorOn()` is actually being called |
-| Motor wired to wrong L293D output pins | OUT1 = pin 3, OUT2 = pin 6 — check datasheet |
-
----
-
-### Motor Spins but Immediately Stops
-
-| Possible Cause | Solution |
-|----------------|----------|
-| Sensor reading is noisy — level jumps across threshold | Use sensor averaging (Exercise 4) or increase hysteresis |
-| `delay(500)` is too short for pump to cause a measurable level change | Normal — the pump takes time; hysteresis handles this |
-| `constrain()` clamping bad readings to boundary values | Verify tank height constant matches real tank; add sensor validity check |
-
----
-
-### Pump Chatters (Turns ON/OFF Rapidly)
-
-This is the exact problem hysteresis is designed to solve:
-
-| Possible Cause | Solution |
-|----------------|----------|
-| `HYSTERESIS` value too small | Increase from 2.0 to 5.0 cm or more |
-| Version 1 code in use (no hysteresis) | Switch to Version 2 |
-| Sensor noise causes level to jump across threshold | Use averaged readings (Exercise 4) |
-
----
-
-### `motorState` Is True but Motor Is Not Running
-
-`motorState` is updated by the software and only reflects what was **last commanded**,
-not what the motor is physically doing. Possible causes:
-
-- `motorOn()` was never actually called (check logic flow)
-- External power supply is disconnected
-- L293D is overheated and in thermal shutdown (the chip gets hot — let it cool)
-
----
-
-## 10. Summary
-
-In this project you built a complete, real-world automatic control system. You learned:
-
-- The **SRF04 ultrasonic sensor** measures distance using the speed of sound and
-  the round-trip time of a reflected pulse.
-- `pulseIn()` measures the duration of a HIGH pulse in microseconds.
-- `delayMicroseconds()` creates sub-millisecond pauses for precise sensor triggering.
-- The **L293D H-bridge** provides current amplification and direction control for
-  DC motors. ENA controls speed via PWM, IN1/IN2 set direction.
-- `analogWrite(pin, 0–255)` outputs a PWM signal for variable-speed motor control.
-- **Water level** is calculated as `tankHeight − distance`, because the sensor
-  measures from the top down.
-- **`constrain(value, min, max)`** clamps a value to a safe range, preventing
-  negative or out-of-bounds water levels from sensor noise.
-- **Hysteresis (dead-band control)** prevents chattering by defining separate
-  ON and OFF thresholds around the target level.
-- `motorState` as a `bool` tracks the current actuator state, necessary for correct
-  behavior inside the dead zone.
-- Breaking sensing, calculation, and control into **separate functions** makes the
-  program readable, testable, and easy to expand.
-
 ### Control Engineering Connection
 
 The system you built is a **bang-bang controller with hysteresis** — the simplest
@@ -1129,13 +874,3 @@ motor speed is proportional to the error — and beyond that, full **PID control
 | `analogWrite()` | `analogWrite(pin, 0–255)` | Output PWM signal (motor speed / LED brightness) |
 | `constrain()` | `constrain(val, min, max)` | Clamp a value to [min, max] |
 
-### New Vocabulary
-
-`ultrasonic sensor` · `TRIG` · `ECHO` · `pulseIn` · `microsecond` · `speed of sound`  
-`H-bridge` · `L293D` · `motor driver` · `PWM` · `duty cycle` · `ENA` · `IN1/IN2`  
-`hysteresis` · `dead zone` · `chattering` · `bang-bang control` · `setpoint`  
-`process variable` · `feedback control` · `constrain` · `ternary operator`
-
----
-
-*Next Project → **PID Control**: Moving from bang-bang to proportional–integral–derivative control for smooth, precise level regulation.*
