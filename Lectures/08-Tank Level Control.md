@@ -1,4 +1,4 @@
-# Project 09 — Water Tank Level Control: Ultrasonic Sensor & DC Motor
+# Project 08 — Water Tank Level Control: Ultrasonic Sensor & DC Motor
 
 
 ## 1. What Are We Building?
