@@ -18,8 +18,8 @@ Each lecture lives in [`01 Lectures/`](./01%20Lectures) and builds directly on t
 | 05 | [Fire Alarm System](<./01 Lectures/05-Fire%20Alarm%20System.md>) | Sensors, thresholds, conditional logic in a real project |
 | 06 | [Servo](<./01 Lectures/06-Servo.md>) | PWM signals and controlling a servo motor |
 | 07 | [Security System](<./01 Lectures/07-Security%20System.md>) | Putting it all together — sensors, logic, and actuation in one build |
-| 08 | [Advanced](<./01 Lectures/08-Tank Level Control.md>) | Enums, state machines, and cleaner control-flow patterns |
-| 09 | [Advanced](<./01 Lectures/09-SpeedMeasurement.md>) | Enums, state machines, and cleaner control-flow patterns |
+| 08 | [Tank Level Control](<./01 Lectures/08-Tank Level Control.md>) | Enums, state machines, and cleaner control-flow patterns |
+| 09 | [Speed Measurement](<./01 Lectures/09-SpeedMeasurement.md>) | Enums, state machines, and cleaner control-flow patterns |
 
 <br/>
 
